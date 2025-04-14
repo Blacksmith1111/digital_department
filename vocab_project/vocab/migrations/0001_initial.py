@@ -1,0 +1,41 @@
+"""Method"""
+import django.db.models.deletion
+from django.db import migrations, models
+
+
+class Migration(migrations.Migration):
+    """Class"""
+    initial = True
+
+    dependencies = [
+    ]
+
+    operations = [
+        migrations.CreateModel(
+            name='CardSet',
+            fields=[
+                ('id',
+                models.BigAutoField(auto_created=True,
+                primary_key=True, serialize=False, verbose_name='ID')),
+                ('title', models.CharField(max_length=100)),
+                ('description', models.TextField()),
+                ('created_at', models.DateTimeField(auto_now_add=True)),
+            ],
+        ),
+        migrations.CreateModel(
+            name='Card',
+            fields=[
+                ('id',
+                models.BigAutoField(auto_created=True,
+                primary_key=True, serialize=False, verbose_name='ID')),
+                ('term',
+                models.CharField(max_length=200)),
+                ('definition',
+                models.TextField()),
+                ('created_at',
+                models.DateTimeField(auto_now_add=True)),
+                ('set',
+                models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='vocab.cardset')),
+            ],
+        ),
+    ]

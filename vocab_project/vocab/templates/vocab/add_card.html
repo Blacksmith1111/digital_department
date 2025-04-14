@@ -1,0 +1,36 @@
+{% extends 'vocab/base.html' %}
+
+{% block content %}
+    <h1>Добавить карточку в набор "{{ set.title }}"</h1>
+    <form method="post">
+        {% csrf_token %}
+        
+        {% if form.errors %}
+            <div class="alert error">
+                Исправьте ошибки в форме
+            </div>
+        {% endif %}
+        
+        <div class="form-group">
+            {{ form.term.label_tag }}
+            {{ form.term }}
+            {% if form.term.errors %}
+                <div class="error-list">
+                    {{ form.term.errors }}
+                </div>
+            {% endif %}
+        </div>
+
+        <div class="form-group">
+            {{ form.definition.label_tag }}
+            {{ form.definition }}
+            {% if form.definition.errors %}
+                <div class="error-list">
+                    {{ form.definition.errors }}
+                </div>
+            {% endif %}
+        </div>
+
+        <button type="submit" class="btn">Добавить карточку</button>
+    </form>
+{% endblock %}

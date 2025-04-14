@@ -1,0 +1,10 @@
+{% extends 'vocab/base.html' %}
+
+{% block content %}
+    <h1>Создать новый набор</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Создать набор</button>
+    </form>
+{% endblock %}

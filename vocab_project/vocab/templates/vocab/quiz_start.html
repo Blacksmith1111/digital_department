@@ -1,0 +1,22 @@
+{% extends 'vocab/base.html' %}
+
+{% block content %}
+<div class="quiz-container">
+    <h2>Тренировка: {{ current_card.set.title }}</h2>
+    <div class="progress">Прогресс: {{ progress }}</div>
+    
+    <div class="card quiz-card">
+        <div class="definition">
+            <strong>Определение:</strong>
+            <p>{{ current_card.definition }}</p>
+        </div>
+        
+        <form method="post">
+            {% csrf_token %}
+            <input type="text" name="user_answer" placeholder="Введите термин" required
+                   class="answer-input" autocomplete="off" autofocus>
+            <button type="submit" class="check-button">Проверить ответ</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
