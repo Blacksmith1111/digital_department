@@ -1,0 +1,27 @@
+{% extends 'vocab/base.html' %}
+
+{% block content %}
+    <h1>Мои наборы карточек</h1>
+    <div class="sets-container">
+        {% for set in sets %}
+            <div class="set-card">
+                <a href="{% url 'study_set' set.id %}" class="set-link">
+                    <div class="set-content">
+                        <h3>{{ set.title }}</h3>
+                        <p class="set-description">{{ set.description }}</p>
+                        <div class="set-meta">
+                            <span>Карточек: {{ set.card_set.count }}</span>
+                        </div>
+                    </div>
+                </a>
+                <form method="post" action="{% url 'delete_set' set.id %}" class="delete-form">
+                    {% csrf_token %}
+                    <button type="submit" class="delete-btn" 
+                            onclick="return confirm('Удалить весь набор?')">×</button>
+                </form>
+            </div>
+        {% empty %}
+            <p class="empty-message">Пока нет наборов карточек. Создайте первый!</p>
+        {% endfor %}
+    </div>
+{% endblock %}
